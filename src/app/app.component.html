@@ -1,0 +1,142 @@
+<div class="container fluid" hidden="hidden">
+
+    <fieldset>
+        <legend>FORM</legend>
+        <form [formGroup]="formData" (ngSubmit)="submitForm(formData)" class="form">
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label col-form-label-sm">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" formControlName="email" class="form-control form-control-sm" />
+                    <!-- <div *ngIf="formData.controls.email.dirty && formData.controls.email.value ==''"> -->
+                    <div class='alert alert-warning'>Dirty: {{formData.controls.email.dirty}}</div>
+                    <div class='alert alert-warning'>Pristine: {{formData.controls.email.pristine}}</div>
+                    <div class='alert alert-warning'>Valid: {{formData.controls.email.valid}}</div>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                Password:
+                <input type="password" formControlName="password" />
+                <div class="alert-box">
+                    Valid: {{formData.controls.password.valid}}
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Enviar" [disabled]="!formData.valid" />
+
+            </div>
+        </form>
+
+        <!-- <form #myForm="ngForm" (ngSubmit)=' submitForm(myForm)'>
+        <div class="form-group">
+            Email:
+            <input type="text" name="email" ngModel />
+            <div>
+                Dirty: {{myForm.controls.email.dirty}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            Password:
+            <input type="password" name="password" ngModel />
+        </div>
+
+        <input type="submit" value="Enviar" />
+    </form>
+    {{myForm.controls | showOnConsole}} -->
+
+
+    </fieldset>
+    <table class="my-table">
+        <tr *ngFor="let item of months; let i = index" (mouseover)="addClass('some-border', $event,i)"
+            (mouseout)="removeClass('some-border', $event,i)" [ngClass]="{'blur-all':item.notSelected }">
+            <td>
+                Index: {{i}} - {{item.name}}
+            </td>
+        </tr>
+    </table>
+    <fieldset>
+        <legend>PIPES</legend>
+
+        <div appBlur='red'>
+            {{ "Hello I'm Here with pipe of lowercase" | lowercase }}
+        </div>
+        <div appBlur>
+            {{ "Hello I'm Here with pipe of uppercase" | uppercase }}
+        </div>
+        <div>{{ todayDate | date:'dd/MM/y' }}</div>
+        <div>{{ todayDate | date:'shortTime' }}</div>
+
+        <div>{{ 454.78787814 | number: '3.4-4' }}</div>
+        <div>{{0.5 | percent}}</div>
+        <div>
+            <h3>Week</h3>
+            {{daysWeek | slice:4}}
+        </div>
+        <h4>Custom PIPE</h4>
+        <div>SQUARE: {{9 | sqrt}} </div>
+        <div>AddText: {{'abc' | addtext:'def':true}} </div>
+    </fieldset>
+    <hr />
+    <select name="" id="" (change)="showOnConsole(picked, $event)" [(ngModel)]="picked" #p>
+        <option value="" disabled>Escolha um mês</option>
+        <option value="" *ngFor='let item of months' [value]='item.name'>{{item.name}}</option>
+    </select>
+    <br />
+    <div appMyDirective>
+        appMyDirective
+    </div>
+    <div [ngClass]="{'esconde': picked}">
+        {{p.value}}
+    </div>
+    <br />
+    <button (click)='isavailable=!isavailable; showOnConsole("abc", $event)'>Change isavailable</button>
+    <br />
+    <fieldset>
+        <legend>Users from HTTP</legend>
+        <div>
+            <div>
+                <h3>Search</h3>
+                <div>
+                    <input type="text" #search (keyup)="searchById(search)" />
+                    <!-- <input type="text" (blur)="showOnConsole('abc')" /> -->
+                </div>
+            </div>
+            <h3>ALL</h3>
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Username</td>
+                    <td>Email</td>
+                    <td>Street</td>
+                </tr>
+                <tr *ngFor='let item of users'
+                    [ngClass]='{"hide-me": searchById(search)  != item.id && searchById(search) !="" }'
+                    class='transition-all'>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{ item.address.street ? item.address.street : "#" }}</td>
+                </tr>
+            </table>
+        </div>
+
+    </fieldset>
+
+
+    <span *ngIf="isavailable; then condition1 else condition2">Span Condition is valid.</span>
+    <ng-template #condition1>Condition is valid</ng-template>
+    <ng-template #condition2>Condition is invalid</ng-template>
+    <hr />
+    <!-- <app-states></app-states> -->
+    <fieldset>
+        <legend>RouterLinks</legend>
+        <a routerLink="states">States</a>
+        <a routerLink="cities">Cities</a>
+    </fieldset>
+</div>
+<div class="container-fluid">
+    <router-outlet></router-outlet>
+</div>

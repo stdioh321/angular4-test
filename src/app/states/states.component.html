@@ -1,0 +1,34 @@
+<!-- <div>
+   <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata)" >
+      <input type = "text" class = "fortextbox" name = "emailid" placeholder = "emailid" 
+         formControlName = "emailid">
+         <div *ngIf='formdata.controls.emailid.dirty && formdata.controls.emailid.value==""'>
+         	Precisa ee um valor
+         </div>
+      <br/>
+      <input type = "password" class = "fortextbox" name = "passwd" 
+         placeholder = "passwd" formControlName = "passwd">
+      <br/>
+      <input type = "submit" [disabled] = "!formdata.valid" class = "forsubmit" 
+         value = "Log In">
+   </form>
+</div>
+
+<p>
+   Email entered is : {{emailid}}
+</p>
+ -->
+ 
+ <hr />
+
+ <div>
+ 	<form [formGroup]='formdata' (ngSubmit)="sendForm(formdata)">
+ 		Name: <input type="text" formControlName='name' /><br />
+ 		Email: <input type="text" formControlName='email' /><br />
+ 		<input type="submit" name="" value="Enviar" [disabled]="!formdata.controls.name.valid">
+ 	</form>
+ </div>
+<div>
+   inputTest : {{inputTest}}
+</div>
+ {{formdata.controls.name.dirty}}

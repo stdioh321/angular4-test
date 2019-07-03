@@ -1,0 +1,21 @@
+<ul *ngIf="cityList.length>0; else loading">
+  <li *ngFor="let city of cityList">
+    {{ city.city_name }} - {{ city.prov_name }}
+  </li>
+</ul>
+<ng-template #loading>No cities found</ng-template>
+
+<hr />
+
+<form #myForm="ngForm" (ngSubmit)="register(myForm)">
+  City Name: <input type="text" name="nameCity" ngModel>
+  <br />
+
+  Prov Name: <input type="text" name="nameProvName" ngModel>
+  <br />
+  <div ngModelGroup="location">
+  </div>
+	<button type="submit">Submit</button>
+<br/>
+	
+</form>

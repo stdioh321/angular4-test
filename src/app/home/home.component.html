@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h2>
+      Form to Add
+    </h2>
+    <form [formGroup]="myForm" (ngSubmit)="submitForm(myForm)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id='name' placeholder="Name...." formControlName='name' />
+        <div class="alert alert-danger"
+          *ngIf="myForm.controls.name.dirty && myForm.controls.name.errors?.pattern?.requiredPattern">Pattern is wrong
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" formControlName='email' id="email" class="form-control" placeholder="Email...." />
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="number" id="date" class="form-control" formControlName='date' value="1990" max="2019" min="1900"
+          #date />
+        <div class='alert alert-danger' *ngIf="myForm.controls.date.dirty && myForm.controls.date.errors?.range">Out of
+          range</div>
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Send" [disabled]="!myForm.valid" />
+        <input type="button" class="btn btn-danger" value="Reset" (click)='myForm.reset()' />
+      </div>
+
+    </form>
+  </div>
+  <!-- {{myForm.value | json }} -->
+  <div class="col-sm-6">
+    <h2>List Here</h2>
+    <table class="table table-striped">
+      <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Date</td>
+      </tr>
+      <tr *ngFor="let item of users">
+        <td>{{item?.name}}</td>
+        <td>{{item?.email}}</td>
+        <td>{{item?.date}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Users from Web Api</h2>
+    <ul class="list-group">
+
+      <li class="list-group-item" *ngIf="usersApi.length < 1">Nada</li>
+      <li class="list-group-item" *ngFor="let item of usersApi">{{item.name}}</li>
+
+    </ul>
+  </div>
+</div>

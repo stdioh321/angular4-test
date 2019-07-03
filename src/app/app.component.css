@@ -1,0 +1,40 @@
+.my-table {
+  width: 100%;
+  border: solid red 1px;
+}
+
+.my-table td {
+  border: solid rgba(0, 0, 0, 0) 5px;
+  padding: 2px;
+}
+.some-border {
+  border-left-color: green !important;
+  
+  /* border-style: dashed;
+  border-width: 3px; */
+}
+
+.blur-all {
+  filter: blur(3px);
+}
+
+.hide-me {
+  /* filter: blur(4px);
+  /* border: solid red 1px; */
+  /* transform: scaleY(0); */
+  display: none;
+}
+
+.transition-all {
+  transition: all 1s;
+  /* visibility: visible; */
+  /* height: auto; */
+}
+
+.alert-box {
+  border: solid rgb(197, 169, 12) 1px;
+  border-radius: 5px;
+  background-color: rgb(230, 223, 185);
+  padding: 5px;
+  margin: 5px 0;
+}
